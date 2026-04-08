@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #0B3D2E;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #1A5C3A;
+  }
+}
+
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .hero-bg {
+    background: linear-gradient(135deg, #0B3D2E 0%, #1A5C3A 50%, #0B3D2E 100%);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #6FAF73, #F4B942);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .solar-ray {
+    animation: solar-ray 3s ease-in-out infinite;
+  }
+
+  .btn-primary {
+    @apply bg-yellow-accent hover:bg-yellow-dark text-green-dark font-bold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg hover:shadow-yellow-accent/30 hover:-translate-y-0.5;
+  }
+
+  .btn-outline {
+    @apply border-2 border-white/40 hover:border-white text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 hover:bg-white/10;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-gray-800;
+  }
+
+  .section-subtitle {
+    @apply text-gray-500 text-lg mt-3 max-w-2xl mx-auto;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200;
+  }
+}
+
+@keyframes solar-ray {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50%       { transform: scale(1.15); opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-20px); }
+}
+
+@keyframes rotateSun {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
