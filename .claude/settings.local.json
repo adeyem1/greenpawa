@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(cp \"/Users/adeyemiadesanya/Downloads/GreenPaWa transparent.png\" /Users/adeyemiadesanya/Downloads/codium/Greenpawa/frontend/public/logo.png)",
-      "Bash(cp /Users/adeyemiadesanya/Downloads/GreenPaWa.svg /Users/adeyemiadesanya/Downloads/codium/Greenpawa/frontend/public/favicon.svg)",
-      "Bash(npm install:*)"
-    ]
-  }
-}
