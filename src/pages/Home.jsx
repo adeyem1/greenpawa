@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 import { FiSun, FiZap, FiBattery, FiShield, FiArrowRight, FiCheckCircle } from 'react-icons/fi';
 import ProductCard from '../components/ProductCard';
+import { PRODUCTS as STATIC_PRODUCTS } from '../data/products';
 
 const API = import.meta.env.VITE_API_URL || '/api';
 
@@ -62,9 +63,13 @@ export default function Home() {
   const [loading, setLoading]   = useState(true);
 
   useEffect(() => {
+    const fallback = STATIC_PRODUCTS.filter((p) => p.featured).slice(0, 3);
     axios.get(`${API}/products?featured=true`)
-      .then((res) => setFeatured((res.data.products || res.data).slice(0, 3)))
-      .catch(() => {})
+      .then((res) => {
+        const data = (res.data.products || res.data).slice(0, 3);
+        setFeatured(data.length ? data : fallback);
+      })
+      .catch(() => setFeatured(fallback))
       .finally(() => setLoading(false));
   }, []);
 

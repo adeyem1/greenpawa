@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMenu, FiX } from 'react-icons/fi';
+import { FiMenu, FiX, FiShoppingCart } from 'react-icons/fi';
+import { useCart } from '../context/CartContext';
 
 const NAV_LINKS = [
   { to: '/',           label: 'Home' },
@@ -15,6 +16,7 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { cartCount, setIsCartOpen } = useCart();
   const { pathname } = useLocation();
   const isHome = pathname === '/';
 
@@ -48,13 +50,28 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Hamburger */}
-        <button
-          onClick={() => setMenuOpen((o) => !o)}
-          className="md:hidden p-2 text-white/80 hover:text-white transition-colors"
-        >
-          {menuOpen ? <FiX className="text-xl" /> : <FiMenu className="text-xl" />}
-        </button>
+        <div className="flex items-center gap-3">
+          {/* Cart */}
+          <button
+            onClick={() => setIsCartOpen(true)}
+            className="relative p-2 text-white/80 hover:text-white transition-colors"
+          >
+            <FiShoppingCart className="text-xl" />
+            {cartCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-yellow-accent text-green-dark text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                {cartCount > 9 ? '9+' : cartCount}
+              </span>
+            )}
+          </button>
+
+          {/* Hamburger */}
+          <button
+            onClick={() => setMenuOpen((o) => !o)}
+            className="md:hidden p-2 text-white/80 hover:text-white transition-colors"
+          >
+            {menuOpen ? <FiX className="text-xl" /> : <FiMenu className="text-xl" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}

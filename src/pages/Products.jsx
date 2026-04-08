@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 import { FiSearch, FiFilter } from 'react-icons/fi';
 import ProductCard from '../components/ProductCard';
+import { PRODUCTS as STATIC_PRODUCTS } from '../data/products';
 
 const API = import.meta.env.VITE_API_URL || '/api';
 
@@ -42,9 +43,10 @@ export default function Products() {
       try {
         const params = category ? `?category=${category}` : '';
         const res = await axios.get(`${API}/products${params}`);
-        setProducts(res.data.products || res.data);
+        const data = res.data.products || res.data;
+        setProducts(data.length ? data : STATIC_PRODUCTS);
       } catch {
-        setProducts([]);
+        setProducts(STATIC_PRODUCTS);
       } finally {
         setLoading(false);
       }
