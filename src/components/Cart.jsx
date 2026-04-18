@@ -3,7 +3,7 @@ import { FiX, FiTrash2, FiPlus, FiMinus, FiShoppingBag } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import { useCart } from '../context/CartContext';
 
-const WHATSAPP_NUMBER = '2349063148717';
+const WHATSAPP_NUMBER = '2349036089491';
 
 export default function Cart() {
   const { items, cartTotal, cartCount, isCartOpen, setIsCartOpen, removeFromCart, updateQuantity, clearCart } = useCart();

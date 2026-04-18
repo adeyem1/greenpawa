@@ -5,12 +5,12 @@ import axios from 'axios';
 import { FiMail, FiPhone, FiMapPin, FiCheckCircle, FiChevronDown } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 
-const API = import.meta.env.VITE_API_URL || '/api';
-const WHATSAPP = 'https://wa.me/2348000000000?text=Hello%20GreenPaWa%2C%20I%20am%20interested%20in%20solar%20energy%20solutions.';
+const API      = import.meta.env.VITE_API_URL || '/api';
+const WHATSAPP = 'https://wa.me/2349036089491?text=Hello%20GreenPaWa%2C%20I%20am%20interested%20in%20solar%20energy%20solutions.';
 
 const CONTACT_INFO = [
-  { icon: FiPhone,  title: 'Phone',    value: '+234 800 000 0000',           sub: 'Mon–Sat, 8am–6pm' },
-  { icon: FiMail,   title: 'Email',    value: 'hello@greenpawa.com',         sub: 'We reply within 24 hours' },
+  { icon: FiPhone,  title: 'Phone',    value: '+234 903 608 9491',           sub: 'Mon–Sat, 8am–6pm' },
+  { icon: FiMail,   title: 'Email',    value: 'Contact@greenpawa.com',       sub: 'We reply within 24 hours' },
   { icon: FiMapPin, title: 'Address',  value: '123 Solar Ave, Victoria Island', sub: 'Lagos, Nigeria' },
 ];
 
@@ -42,8 +42,7 @@ export default function Contact() {
       setSent(true);
       setForm({ name: '', email: '', phone: '', subject: '', message: '' });
     } catch {
-      // still show success to avoid spam enumeration
-      setSent(true);
+      alert('Failed to send message. Please try again or contact us directly on WhatsApp.');
     } finally {
       setSending(false);
     }
@@ -113,7 +112,7 @@ export default function Contact() {
                     {[
                       { name: 'name',    label: 'Full Name *',    placeholder: 'John Doe',          required: true },
                       { name: 'email',   label: 'Email *',         placeholder: 'you@example.com',   required: true, type: 'email' },
-                      { name: 'phone',   label: 'Phone Number',    placeholder: '+234 800 000 0000' },
+                      { name: 'phone',   label: 'Phone Number',    placeholder: '+234 903 608 9491' },
                       { name: 'subject', label: 'Subject',         placeholder: 'Solar installation inquiry' },
                     ].map((f) => (
                       <div key={f.name}>

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { FiMail, FiPhone, FiMapPin, FiInstagram, FiTwitter, FiFacebook } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 
-const WHATSAPP = 'https://wa.me/2348000000000';
+const WHATSAPP = 'https://wa.me/2349036089491';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -81,11 +81,11 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3 text-sm text-white/60">
                 <FiPhone className="shrink-0 text-yellow-accent" />
-                <span>+234 800 000 0000</span>
+                <span>+234 903 608 9491</span>
               </li>
               <li className="flex items-center gap-3 text-sm text-white/60">
                 <FiMail className="shrink-0 text-yellow-accent" />
-                <span>hello@greenpawa.com</span>
+                <span>Contact@greenpawa.com</span>
               </li>
             </ul>
             <a
