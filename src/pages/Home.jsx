@@ -1,13 +1,8 @@
-import { useEffect, useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import useSEO from '../hooks/useSEO';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import axios from 'axios';
 import { FiSun, FiZap, FiBattery, FiShield, FiArrowRight, FiCheckCircle } from 'react-icons/fi';
-import ProductCard from '../components/ProductCard';
-import { PRODUCTS as STATIC_PRODUCTS } from '../data/products';
-
-const API = import.meta.env.VITE_API_URL || '/api';
 
 function Counter({ target, suffix = '', duration = 2000 }) {
   const [count, setCount] = useState(0);
@@ -59,20 +54,6 @@ export default function Home() {
     title: 'GreenPaWa – Nigeria\'s #1 Solar Energy Solutions | Inverters, Batteries & Panels',
     description: 'GreenPaWa delivers premium solar inverters, lithium batteries, and solar panels with expert installation across Nigeria. Get a free consultation today.',
   });
-  const [featured, setFeatured] = useState([]);
-  const [loading, setLoading]   = useState(true);
-
-  useEffect(() => {
-    const fallback = STATIC_PRODUCTS.filter((p) => p.featured).slice(0, 3);
-    axios.get(`${API}/products?featured=true`)
-      .then((res) => {
-        const data = (res.data.products || res.data).slice(0, 3);
-        setFeatured(data.length ? data : fallback);
-      })
-      .catch(() => setFeatured(fallback))
-      .finally(() => setLoading(false));
-  }, []);
-
   return (
     <div className="overflow-x-hidden">
       {/* ── HERO ── */}
@@ -107,8 +88,8 @@ export default function Home() {
                 Say goodbye to NEPA interruptions. GreenPaWa delivers premium inverters, batteries and solar panels with expert installation across Nigeria.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link to="/products" className="btn-primary flex items-center gap-2">
-                  Shop Products <FiArrowRight />
+                <Link to="/contact" className="btn-primary flex items-center gap-2">
+                  Get a Free Quote <FiArrowRight />
                 </Link>
                 <Link to="/calculator" className="btn-outline">
                   Calculate Savings
@@ -151,66 +132,6 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── CATEGORIES ── */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="section-title">Shop by Category</h2>
-          <p className="section-subtitle">Everything you need for a complete solar energy system</p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-            {[
-              { label: 'Inverters',    icon: FiZap,     cat: 'inverter',     gradient: 'from-blue-600 to-blue-400',   desc: 'Hybrid & off-grid inverters for every load size' },
-              { label: 'Batteries',    icon: FiBattery,  cat: 'battery',      gradient: 'from-purple-600 to-purple-400', desc: 'Lithium & AGM batteries for reliable energy storage' },
-              { label: 'Solar Panels', icon: FiSun,      cat: 'solar-panel',  gradient: 'from-yellow-500 to-orange-400', desc: 'Monocrystalline & bifacial panels from top brands' },
-            ].map((c) => (
-              <motion.div
-                key={c.cat}
-                whileHover={{ y: -6 }}
-                className="relative overflow-hidden rounded-2xl shadow-md cursor-pointer group"
-              >
-                <Link to={`/products?category=${c.cat}`}>
-                  <div className={`bg-gradient-to-br ${c.gradient} p-10 text-white text-center`}>
-                    <c.icon className="text-6xl mx-auto mb-4 opacity-90" />
-                    <h3 className="text-2xl font-bold mb-2">{c.label}</h3>
-                    <p className="text-white/80 text-sm">{c.desc}</p>
-                    <span className="inline-flex items-center gap-1 mt-4 text-sm font-semibold group-hover:gap-3 transition-all">
-                      Browse {c.label} <FiArrowRight />
-                    </span>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── FEATURED PRODUCTS ── */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex items-end justify-between mb-10">
-            <div>
-              <h2 className="section-title">Featured Products</h2>
-              <p className="text-gray-500 mt-2">Our most popular solar solutions</p>
-            </div>
-            <Link to="/products" className="text-green-dark font-semibold hover:text-green-mid flex items-center gap-1 text-sm">
-              View All <FiArrowRight />
-            </Link>
-          </div>
-
-          {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="bg-gray-100 rounded-2xl h-80 animate-pulse" />
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {featured.map((p) => <ProductCard key={p._id} product={p} />)}
-            </div>
-          )}
         </div>
       </section>
 
@@ -298,11 +219,11 @@ export default function Home() {
             Join 5,000+ Nigerians who are saving money and living free from power outages.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link to="/products" className="bg-green-dark text-white font-bold px-8 py-4 rounded-xl hover:bg-green-mid transition-colors shadow-lg">
-              Shop Now
-            </Link>
-            <Link to="/contact" className="bg-white text-green-dark font-bold px-8 py-4 rounded-xl hover:bg-gray-50 transition-colors shadow">
+            <Link to="/contact" className="bg-green-dark text-white font-bold px-8 py-4 rounded-xl hover:bg-green-mid transition-colors shadow-lg">
               Get a Free Quote
+            </Link>
+            <Link to="/services" className="bg-white text-green-dark font-bold px-8 py-4 rounded-xl hover:bg-gray-50 transition-colors shadow">
+              Our Services
             </Link>
           </div>
         </div>

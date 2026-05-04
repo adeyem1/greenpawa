@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import useSEO from '../hooks/useSEO';
 import { motion, AnimatePresence } from 'framer-motion';
-import axios from 'axios';
+import emailjs from '@emailjs/browser';
 import { FiMail, FiPhone, FiMapPin, FiCheckCircle, FiChevronDown } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 
-const API      = import.meta.env.VITE_API_URL || '/api';
+const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
 const WHATSAPP = 'https://wa.me/2349036089491?text=Hello%20GreenPaWa%2C%20I%20am%20interested%20in%20solar%20energy%20solutions.';
 
 const CONTACT_INFO = [
@@ -38,7 +41,18 @@ export default function Contact() {
     e.preventDefault();
     setSending(true);
     try {
-      await axios.post(`${API}/contact`, form);
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name:    form.name,
+          from_email:   form.email,
+          phone:        form.phone,
+          subject:      form.subject,
+          message:      form.message,
+        },
+        EMAILJS_PUBLIC_KEY,
+      );
       setSent(true);
       setForm({ name: '', email: '', phone: '', subject: '', message: '' });
     } catch {
